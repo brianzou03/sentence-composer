@@ -8,7 +8,7 @@ from PyDictionary import PyDictionary
 # nltk.download('wordnet')
 from nltk.corpus import wordnet as wn
 
-word_list = ['amazing', 'interesting', 'love', 'great', 'nice']  # replace w/ txt file -> needs conversion
+word_list = ['a', 'person', 'amazing', 'interesting', 'love', 'great', 'nice']  # replace w/ txt file -> needs conversion
 pos_all = dict()
 
 for word in word_list:
@@ -18,14 +18,14 @@ for word in word_list:
             # Part of Speech (pos) Synset: n = noun, v = verb, a = adjective, r = adverb
             pos_l.add(tmp.pos())
     pos_all[word] = pos_l
-    print(word, pos_l)
+    # print(word, pos_l)
 
 # pos_all dictionary - 'key' : set of {'values'}
-print(pos_all)
+# print(pos_all)
 
 contains_s = {'s'} in pos_all.values()
 
-print(contains_s)
+# print(contains_s)
 
 # Finds position of key
 key_1 = list(pos_all.keys()).index('interesting')
@@ -46,22 +46,25 @@ class Sentence:
 
     def open_file(self):
         open_words = open("words.txt", "r")
+        return open_words
 
-        print(open_words)
 
     def joiner(self):
-        print(self.value1.capitalize() + " " + self.value2 + ".")
+        syn = wn.synsets(self.value1)[0].pos()
+        print(syn)
+
+        syn2 = wn.synsets(self.value2)[0].pos()
+        print(syn2)
+
+        if syn == "n" and syn2 == "v":
+            print(self.value1.capitalize() + " " + self.value2 + ".")
 
 
 my_obj = Sentence(word_list[1], word_list[2])
+my_obj.open_file()
 my_obj.joiner()
 
 # TODO: CREATE SENTENCES VIA LOOP, FILTERS OUT INVALID SENTENCES, STOPS AT 1000 WORDS
 # EXPLAIN IN README EXPANSION POTENTIAL
 # PROOF OF CONCEPT
-
-open_words = open("words.txt", "r")
-
-print(open_words)
-
-
+# A VS AN, DIFFERENT PARTS OF SPEECH, ETC -> KNOWN ISSUES
