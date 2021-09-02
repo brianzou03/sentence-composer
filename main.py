@@ -1,14 +1,13 @@
 # Uses Python natural language toolkit (NLTK)
 # English words txt file from: https://github.com/dwyl/english-words
 
-from PyDictionary import PyDictionary
-
-# 2 Lines commented below are necessary for the first run of program
+# 2 Lines commented below are necessary for the initial run of program
 # import nltk
 # nltk.download('wordnet')
 from nltk.corpus import wordnet as wn
 
-word_list = ['a', 'person', 'amazing', 'interesting', 'love', 'great', 'nice']  # replace w/ txt file -> needs conversion
+word_list = ['a', 'person', 'amazing', 'interesting', 'love', 'great',
+             'nice']  # replace w/ txt file -> needs conversion
 pos_all = dict()
 
 for word in word_list:
@@ -20,7 +19,6 @@ for word in word_list:
     pos_all[word] = pos_l
     # print(word, pos_l)
 
-# pos_all dictionary - 'key' : set of {'values'}
 # print(pos_all)
 
 contains_s = {'s'} in pos_all.values()
@@ -45,9 +43,15 @@ class Sentence:
         self.value2 = value2
 
     def open_file(self):
-        open_words = open("words.txt", "r")
-        return open_words
-
+        i = 0
+        with open("words.txt", "r") as my_file:
+            for line in my_file:
+                if i < 20:
+                    stripped_line = line.strip()
+                    print(stripped_line)
+                    i += 1
+                else:
+                    break
 
     def joiner(self):
         syn = wn.synsets(self.value1)[0].pos()
@@ -64,7 +68,10 @@ my_obj = Sentence(word_list[1], word_list[2])
 my_obj.open_file()
 my_obj.joiner()
 
-# TODO: CREATE SENTENCES VIA LOOP, FILTERS OUT INVALID SENTENCES, STOPS AT 1000 WORDS
-# EXPLAIN IN README EXPANSION POTENTIAL
-# PROOF OF CONCEPT
-# A VS AN, DIFFERENT PARTS OF SPEECH, ETC -> KNOWN ISSUES
+'''
+TODO: CREATE SENTENCES VIA LOOP, FILTERS OUT INVALID SENTENCES, STOPS AT 1000 WORDS
+- EXPLAIN IN README EXPANSION POTENTIAL
+- PROOF OF CONCEPT
+- A VS AN, DIFFERENT PARTS OF SPEECH, 
+SENTENCE STRUCTURE DOESN'T WORK FOR EVERYTHING, ETC -> KNOWN ISSUES
+'''
