@@ -21,14 +21,11 @@ for word in word_list:
 
 # print(pos_all)
 
-contains_s = {'s'} in pos_all.values()
-
+# contains_s = {'s'} in pos_all.values()
 # print(contains_s)
 
-# Finds position of key
-key_1 = list(pos_all.keys()).index('interesting')
-
-print(key_1)
+# key_1 = list(pos_all.keys()).index('interesting')
+# print(key_1)
 
 ''' Sentence Patterns:
 Subject - Verb - Object
@@ -43,22 +40,21 @@ class Sentence:
         self.value2 = value2
 
     def open_file(self):
+        file_vals = []
         i = 0
         with open("words.txt", "r") as my_file:
             for line in my_file:
                 if i < 20:
                     stripped_line = line.strip()
-                    print(stripped_line)
+                    file_vals.append(stripped_line)
                     i += 1
                 else:
-                    break
+                    print(file_vals)
+                    return file_vals
 
     def joiner(self):
         syn = wn.synsets(self.value1)[0].pos()
-        print(syn)
-
         syn2 = wn.synsets(self.value2)[0].pos()
-        print(syn2)
 
         if syn == "n" and syn2 == "v":
             print(self.value1.capitalize() + " " + self.value2 + ".")
