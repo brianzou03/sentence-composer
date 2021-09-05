@@ -5,6 +5,7 @@
 # import nltk
 # nltk.download('wordnet')
 from nltk.corpus import wordnet as wn
+import ssl
 
 word_list = ['a', 'person', 'amazing', 'interesting', 'love', 'great',
              'nice']  # replace w/ txt file -> needs conversion
@@ -34,10 +35,15 @@ Subject - Verb - Adjective
 Subject - Verb - Adverb '''
 
 
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
+
 class Sentence:
-    def __init__(self, value1, value2):
-        self.value1 = value1
-        self.value2 = value2
 
     def open_file(self):
         file_vals = []
@@ -52,18 +58,25 @@ class Sentence:
                     print(file_vals)
                     return file_vals
 
-    def joiner(self):
-        syn = wn.synsets(self.value1)[0].pos()
-        syn2 = wn.synsets(self.value2)[0].pos()
+    def joiner(self, file_vals):
+        val_1_synsets = wn.synsets(file_vals[0])
+        if not val_1_synsets:
+            val_1 = val_1_synsets[0].pos()
+        else:
+            val_1 = ""
 
-        if syn == "n" and syn2 == "v":
-            print(self.value1.capitalize() + " " + self.value2 + ".")
+        val_2_synsets = wn.synsets(file_vals[1])
+        if not val_2_synsets:
+            val_2 = val_1_synsets[0].pos()
+        else:
+            val_2 = ""
+
+        if val_1 == "n" and val_2 == "v":
+            print(val_1.capitalize() + " " + val_2 + ".")
 
 
-my_obj = Sentence(word_list[1], word_list[2])
-my_obj.open_file()
-my_obj.joiner()
-
+my_obj = Sentence()
+my_obj.joiner(my_obj.open_file())
 '''
 TODO: CREATE SENTENCES VIA LOOP, FILTERS OUT INVALID SENTENCES, STOPS AT 1000 WORDS
 - EXPLAIN IN README EXPANSION POTENTIAL
