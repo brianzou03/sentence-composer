@@ -34,13 +34,13 @@ Subject - Verb
 Subject - Verb - Adjective
 Subject - Verb - Adverb '''
 
-
+"""
 try:
     _create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
     pass
 else:
-    ssl._create_default_https_context = _create_unverified_https_context
+    ssl._create_default_https_context = _create_unverified_https_context"""
 
 
 class Sentence:
@@ -50,7 +50,7 @@ class Sentence:
         i = 0
         with open("words.txt", "r") as my_file:
             for line in my_file:
-                if i < 20:
+                if i < 1002:
                     stripped_line = line.strip()
                     file_vals.append(stripped_line)
                     i += 1
@@ -59,24 +59,38 @@ class Sentence:
                     return file_vals
 
     def joiner(self, file_vals):
-        val_1_synsets = wn.synsets(file_vals[0])
-        if not val_1_synsets:
-            val_1 = val_1_synsets[0].pos()
-        else:
-            val_1 = ""
+        x, y = 0, 1
+        for num in range(1, 1001):
+            val_1_synsets = wn.synsets(file_vals[0])
+            if not val_1_synsets:
+                #finds pos if not empty
+                val_1 = val_1_synsets[0].pos()
+            else:
+                # empty if no value
+                val_1 = ""
 
-        val_2_synsets = wn.synsets(file_vals[1])
-        if not val_2_synsets:
-            val_2 = val_1_synsets[0].pos()
-        else:
-            val_2 = ""
+            val_2_synsets = wn.synsets(file_vals[y])
+            if not val_2_synsets:
+                val_2 = val_1_synsets[0].pos()
+            else:
+                val_2 = ""
 
-        if val_1 == "n" and val_2 == "v":
-            print(val_1.capitalize() + " " + val_2 + ".")
+            print(val_1, val_1_synsets, val_2, val_2_synsets)
+
+            if val_1 == "n" and val_2 == "v":
+                print(val_1.capitalize() + " " + val_2 + ".")
+            else:
+                pass
+
+            x += 1
+            y += 1
+
+
 
 
 my_obj = Sentence()
 my_obj.joiner(my_obj.open_file())
+
 '''
 TODO: CREATE SENTENCES VIA LOOP, FILTERS OUT INVALID SENTENCES, STOPS AT 1000 WORDS
 - EXPLAIN IN README EXPANSION POTENTIAL
