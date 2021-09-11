@@ -43,7 +43,6 @@ else:
     ssl._create_default_https_context = _create_unverified_https_context"""
 
 
-
 class Sentence:
 
     def open_file(self):
@@ -67,27 +66,30 @@ class Sentence:
                 # empty if no value
                 val_1 = ""
 
-            val_2_synsets = wn.synsets(file_vals[num+1])
+            val_2_synsets = wn.synsets(file_vals[num + 1])
             if val_2_synsets:
                 val_2 = val_2_synsets[0].pos()
             else:
                 val_2 = ""
 
-            val_3_synsets = wn.synsets(file_vals[num+2])
+            val_3_synsets = wn.synsets(file_vals[num + 2])
             if val_3_synsets:
                 val_3 = val_3_synsets[0].pos()
             else:
                 val_3 = ""
 
             if val_1 == "n" and val_2 == "v" and val_3 == "a":
-                print(val_1.capitalize() + " " + file_vals[num] + ", " + val_2 + " " + file_vals[num+1] + val_3 + " " + file_vals[num+2])
+                print(
+                    val_1.capitalize() + " " + file_vals[num] + ", " + val_2 + " " + file_vals[num + 1] + val_3 + " " +
+                    file_vals[num + 2])
             elif val_1 == "n" and val_2 == "v" and val_3 == "r":
-                print(val_1.capitalize() + " " + file_vals[num] + ", " + val_2 + " " + file_vals[num + 1] + val_3 + " " + file_vals[num + 2])
+                print(
+                    val_1.capitalize() + " " + file_vals[num] + ", " + val_2 + " " + file_vals[num + 1] + val_3 + " " +
+                    file_vals[num + 2])
             elif val_1 == "n" and val_2 == "v":
-                print(val_1.capitalize() + " " + file_vals[num] + ", " + val_2 + " " + file_vals[num+1])
+                print(val_1.capitalize() + " " + file_vals[num] + ", " + val_2 + " " + file_vals[num + 1])
             else:
                 pass
-
 
 
 my_obj = Sentence()
