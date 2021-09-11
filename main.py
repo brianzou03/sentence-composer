@@ -58,7 +58,7 @@ class Sentence:
 
     def joiner(self, file_vals):
 
-        for num in range(0, len(file_vals) - 1):
+        for num in range(0, len(file_vals) - 2):
             val_1_synsets = wn.synsets(file_vals[num])
             if val_1_synsets:
                 # finds pos if not empty
@@ -73,10 +73,22 @@ class Sentence:
             else:
                 val_2 = ""
 
-            if val_1 == "n" and val_2 == "v":
-                print(val_1.capitalize() + " " + file_vals[num] + ", "  + val_2 + " " + file_vals[num+1])
+            val_3_synsets = wn.synsets(file_vals[num+2])
+            if val_3_synsets:
+                val_3 = val_3_synsets[0].pos()
+            else:
+                val_3 = ""
+
+            if val_1 == "n" and val_2 == "v" and val_3 == "a":
+                print(val_1.capitalize() + " " + file_vals[num] + ", " + val_2 + " " + file_vals[num+1] + val_3 + " " + file_vals[num+2])
+            elif val_1 == "n" and val_2 == "v" and val_3 == "r":
+                print(val_1.capitalize() + " " + file_vals[num] + ", " + val_2 + " " + file_vals[num + 1] + val_3 + " " + file_vals[num + 2])
+            elif val_1 == "n" and val_2 == "v":
+                print(val_1.capitalize() + " " + file_vals[num] + ", " + val_2 + " " + file_vals[num+1])
             else:
                 pass
+
+
 
 my_obj = Sentence()
 my_obj.joiner(my_obj.open_file())
