@@ -1,38 +1,11 @@
 # Uses Python natural language toolkit (NLTK)
 # English words txt file from: https://github.com/dwyl/english-words
 
-# 2 Lines commented below are necessary for the initial run of program
-# import nltk
-# nltk.download('wordnet')
+import nltk
+nltk.download('wordnet')
 from nltk.corpus import wordnet as wn
-import ssl
+# import ssl
 
-word_list = ['a', 'person', 'amazing', 'interesting', 'love', 'great',
-             'nice']  # replace w/ txt file -> needs conversion
-pos_all = dict()
-
-for word in word_list:
-    pos_l = set()
-    for tmp in wn.synsets(word):
-        if tmp.name().split('.')[0] == word:
-            # Part of Speech (pos) Synset: n = noun, v = verb, a = adjective, r = adverb
-            pos_l.add(tmp.pos())
-    pos_all[word] = pos_l
-    # print(word, pos_l)
-
-# print(pos_all)
-
-# contains_s = {'s'} in pos_all.values()
-# print(contains_s)
-
-# key_1 = list(pos_all.keys()).index('interesting')
-# print(key_1)
-
-''' Sentence Patterns:
-Subject - Verb - Object
-Subject - Verb
-Subject - Verb - Adjective
-Subject - Verb - Adverb '''
 
 """
 try:
@@ -56,6 +29,11 @@ class Sentence:
             return file_vals
 
     def joiner(self, file_vals):
+        # TODO: ADD ALL VALUES TO LISt
+        noun_vals = []
+        verb_vals = []
+        adj_vals = []
+        adv_vals = []
 
         for num in range(0, len(file_vals) - 2):
             val_1_synsets = wn.synsets(file_vals[num])
@@ -66,30 +44,27 @@ class Sentence:
                 # empty if no value
                 val_1 = ""
 
-            val_2_synsets = wn.synsets(file_vals[num + 1])
-            if val_2_synsets:
-                val_2 = val_2_synsets[0].pos()
-            else:
-                val_2 = ""
 
-            val_3_synsets = wn.synsets(file_vals[num + 2])
-            if val_3_synsets:
-                val_3 = val_3_synsets[0].pos()
-            else:
-                val_3 = ""
+            if val_1 == "n":
+                noun_vals.append(file_vals[num])
+            elif val_1 == "v":
+                verb_vals.append(file_vals[num])
+            elif val_1 == "a":
+                adj_vals.append(file_vals[num])
+            elif val_1 == "r":
+                adv_vals.append(file_vals[num])
 
-            if val_1 == "n" and val_2 == "v" and val_3 == "a":
-                print(
-                    val_1.capitalize() + " " + file_vals[num] + ", " + val_2 + " " + file_vals[num + 1] + val_3 + " " +
-                    file_vals[num + 2])
-            elif val_1 == "n" and val_2 == "v" and val_3 == "r":
-                print(
-                    val_1.capitalize() + " " + file_vals[num] + ", " + val_2 + " " + file_vals[num + 1] + val_3 + " " +
-                    file_vals[num + 2])
-            elif val_1 == "n" and val_2 == "v":
-                print(val_1.capitalize() + " " + file_vals[num] + ", " + val_2 + " " + file_vals[num + 1])
-            else:
-                pass
+        print("-------------------------") # placeholder separators
+        print(noun_vals)
+        print("-------------------------")
+        print(verb_vals)
+        print("-------------------------")
+        print(adj_vals)
+        print("-------------------------")
+        print(adv_vals)
+        print("-------------------------")
+
+
 
 
 my_obj = Sentence()
