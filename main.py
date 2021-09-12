@@ -29,7 +29,6 @@ class Sentence:
             return file_vals
 
     def joiner(self, file_vals):
-        # TODO: ADD ALL VALUES TO LISt
         noun_vals = []
         verb_vals = []
         adj_vals = []
