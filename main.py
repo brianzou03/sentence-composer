@@ -2,8 +2,10 @@
 # English words txt file from: https://github.com/dwyl/english-words
 
 import nltk
+
 nltk.download('wordnet')
 from nltk.corpus import wordnet as wn
+
 # import ssl
 
 
@@ -43,7 +45,6 @@ class Sentence:
                 # empty if no value
                 val_1 = ""
 
-
             if val_1 == "n":
                 noun_vals.append(file_vals[num])
             elif val_1 == "v":
@@ -53,16 +54,15 @@ class Sentence:
             elif val_1 == "r":
                 adv_vals.append(file_vals[num])
 
-        print("-------------------------") # placeholder separators
         print(noun_vals)
-        print("-------------------------")
         print(verb_vals)
-        print("-------------------------")
         print(adj_vals)
-        print("-------------------------")
         print(adv_vals)
-        print("-------------------------")
 
+        print(len(noun_vals), len(verb_vals), len(adj_vals), len(adv_vals))
+        # print(noun_vals[0], verb_vals[0], sep=" ")
+        for i in range(len(verb_vals)):
+            print(noun_vals[i].capitalize(), verb_vals[i].lower(), sep=" ")
 
 
 
