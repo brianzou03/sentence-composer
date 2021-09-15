@@ -37,21 +37,21 @@ class Sentence:
         adv_vals = []
 
         for num in range(0, len(file_vals) - 2):
-            val_1_synsets = wn.synsets(file_vals[num])
-            if val_1_synsets:
+            value_synsets = wn.synsets(file_vals[num])
+            if value_synsets:
                 # finds pos if not empty
-                val_1 = val_1_synsets[0].pos()
+                value = value_synsets[0].pos()
             else:
                 # empty if no value
-                val_1 = ""
+                value = ""
 
-            if val_1 == "n":
+            if value == "n":
                 noun_vals.append(file_vals[num])
-            elif val_1 == "v":
+            elif value == "v":
                 verb_vals.append(file_vals[num])
-            elif val_1 == "a":
+            elif value == "a":
                 adj_vals.append(file_vals[num])
-            elif val_1 == "r":
+            elif value == "r":
                 adv_vals.append(file_vals[num])
 
         print(noun_vals, "\n", verb_vals, "\n", adj_vals, "\n", adv_vals)
