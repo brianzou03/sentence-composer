@@ -54,16 +54,18 @@ class Sentence:
             elif val_1 == "r":
                 adv_vals.append(file_vals[num])
 
-        print(noun_vals)
-        print(verb_vals)
-        print(adj_vals)
-        print(adv_vals)
+        print(noun_vals, "\n", verb_vals, "\n", adj_vals, "\n", adv_vals)
 
         print(len(noun_vals), len(verb_vals), len(adj_vals), len(adv_vals))
         # print(noun_vals[0], verb_vals[0], sep=" ")
+
+        # Noun + verb sentences TODO: add algo to check grammar validitiy
         for i in range(len(verb_vals)):
             print(noun_vals[i].capitalize(), verb_vals[i].lower(), sep=" ")
 
+        # Noun + verb + adjective sentences
+        for i in range(len(adj_vals)):
+            print(noun_vals[i].capitalize(), verb_vals[i].lower(), adj_vals[i].lower(), sep=" ")
 
 
 my_obj = Sentence()
