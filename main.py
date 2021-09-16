@@ -35,6 +35,7 @@ class Sentence:
         verb_vals = []
         adj_vals = []
         adv_vals = []
+        other_vals = []
 
         for num in range(0, len(file_vals) - 2):
             value_synsets = wn.synsets(file_vals[num])
@@ -53,6 +54,8 @@ class Sentence:
                 adj_vals.append(file_vals[num])
             elif value == "r":
                 adv_vals.append(file_vals[num])
+            else:
+                other_vals.append(file_vals[num])
 
         print(noun_vals, "\n", verb_vals, "\n", adj_vals, "\n", adv_vals)
 
@@ -66,6 +69,10 @@ class Sentence:
         # Noun + verb + adjective sentences
         for i in range(len(adj_vals)):
             print(noun_vals[i].capitalize(), verb_vals[i].lower(), adj_vals[i].lower(), sep=" ")
+
+        # Noun + verb + adverb sentences
+        for i in range(len(adv_vals)):
+            print(noun_vals[i].capitalize(), verb_vals[i].lower(), adv_vals[i].lower(), sep=" ")
 
 
 my_obj = Sentence()
