@@ -1,21 +1,12 @@
 # Uses Python natural language toolkit (NLTK)
 # English words txt file from: https://github.com/dwyl/english-words
+# Grammar parsing uses GingerIt, which takes a while to parse each sentence individually
 
 import nltk
 
 nltk.download('wordnet')
 from nltk.corpus import wordnet as wn
-
-# import ssl
-
-
-"""
-try:
-    _create_unverified_https_context = ssl._create_unverified_context
-except AttributeError:
-    pass
-else:
-    ssl._create_default_https_context = _create_unverified_https_context"""
+from gingerit.gingerit import GingerIt
 
 
 class Sentence:
@@ -57,22 +48,27 @@ class Sentence:
             else:
                 other_vals.append(file_vals[num])
 
-        print(noun_vals, "\n", verb_vals, "\n", adj_vals, "\n", adv_vals)
+        # print(noun_vals, "\n", verb_vals, "\n", adj_vals, "\n", adv_vals)
 
-        print(len(noun_vals), len(verb_vals), len(adj_vals), len(adv_vals))
-        # print(noun_vals[0], verb_vals[0], sep=" ")
+        # print(len(noun_vals), len(verb_vals), len(adj_vals), len(adv_vals))
 
-        # Noun + verb sentences TODO: add algo to check grammar validitiy
+        # Noun + verb sentences
         for i in range(len(verb_vals)):
-            print(noun_vals[i].capitalize(), verb_vals[i].lower(), sep=" ")
+            parser = GingerIt()
+            parsed_item = noun_vals[i].capitalize() + " " + verb_vals[i].lower()
+            print(parser.parse(parsed_item))
 
         # Noun + verb + adjective sentences
         for i in range(len(adj_vals)):
-            print(noun_vals[i].capitalize(), verb_vals[i].lower(), adj_vals[i].lower(), sep=" ")
+            parser = GingerIt()
+            parsed_item = noun_vals[i].capitalize() + " " + verb_vals[i].lower() + " " + adj_vals[i].lower()
+            print(parser.parse(parsed_item))
 
         # Noun + verb + adverb sentences
         for i in range(len(adv_vals)):
-            print(noun_vals[i].capitalize(), verb_vals[i].lower(), adv_vals[i].lower(), sep=" ")
+            parser = GingerIt()
+            parsed_item = noun_vals[i].capitalize() + " " + verb_vals[i].lower() + " " + adv_vals[i].lower()
+            print(parser.parse(parsed_item))
 
 
 my_obj = Sentence()
