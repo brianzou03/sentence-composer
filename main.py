@@ -21,12 +21,8 @@ class Sentence:
                 i += 1
             return file_vals
 
-    def joiner(self, file_vals):
-        noun_vals = []
-        verb_vals = []
-        adj_vals = []
-        adv_vals = []
-        other_vals = []
+    def composer(self, file_vals):
+        noun_vals, verb_vals, adj_vals, adv_vals, other_vals = ([] for i in range(5))
 
         for num in range(0, len(file_vals) - 2):
             value_synsets = wn.synsets(file_vals[num])
@@ -72,4 +68,4 @@ class Sentence:
 
 
 my_obj = Sentence()
-my_obj.joiner(my_obj.open_file())
+my_obj.composer(my_obj.open_file())
