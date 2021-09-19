@@ -3,7 +3,6 @@
 # Grammar parsing uses GingerIt, which takes a while to parse each sentence individually
 
 import nltk
-
 nltk.download('wordnet')
 from nltk.corpus import wordnet as wn
 from gingerit.gingerit import GingerIt
